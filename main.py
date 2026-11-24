@@ -13,10 +13,17 @@ ENTRY = (
     "anniversary."
 )
 
+# Bounty rule: the vow must be one line of 1-160 characters.
+CHAR_LIMIT = 160
+
 
 def main() -> None:
     import os
 
+    if not 1 <= len(ENTRY) <= CHAR_LIMIT:
+        raise SystemExit(
+            f"entry must be 1-{CHAR_LIMIT} characters, got {len(ENTRY)}"
+        )
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
         f.write(ENTRY)
